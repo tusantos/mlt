@@ -4,12 +4,7 @@ import { HeaderComponent } from '../components/header'
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
-  return (
-    <>
-      <HeaderComponent />
-      <Component {...pageProps} />
-    </>
-  )
+  return <Component {...pageProps} />
 }
 
 export default MyApp

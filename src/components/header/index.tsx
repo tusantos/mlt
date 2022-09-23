@@ -1,9 +1,9 @@
-import { Header, HeaderContainer } from './style'
 import Image from 'next/future/image'
+import { Header, HeaderContainer } from './styles'
 import Logo from '../../assets/logo.png'
 import { SearchBoxComponent } from '../searchBox'
 
-export const HeaderComponent = () => {
+export function HeaderComponent() {
   return (
     <Header>
       <HeaderContainer>
