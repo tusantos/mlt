@@ -19,5 +19,6 @@ export const HeaderContainer = styled('section', {
 
   '& > .logo': {
     marginRight: '26px',
+    cursor: 'pointer',
   },
 })

@@ -37,6 +37,9 @@ export const ProductContainer = styled('section', {
     fontSize: '46px',
     fontWeight: '400',
     marginBottom: '32px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 
   '& > .header-infos > .infos > .cta': {
@@ -72,5 +75,6 @@ export const ProductContainer = styled('section', {
     fontSize: '16px',
     fontWeight: '300',
     color: '$grey300',
+    whiteSpace: 'pre-line',
   },
 })

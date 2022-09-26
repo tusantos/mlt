@@ -54,12 +54,14 @@ const handleSearchQueryCategory = (data: QueryResultDTO) => {
   const handleAvailableFilters = data?.available_filters?.find((el) => el.id === 'category')
 
   if (handleFilters) {
-    return handleFilters?.values
+    const data = handleFilters?.values
       ?.map((el) => el.path_from_root.map((elem) => elem.name))
-      .slice(0, 4)
+      .slice(0, 3)
+
+    return data?.[0]
   }
 
-  return handleAvailableFilters?.values?.map((el) => el.name).slice(0, 4)
+  return handleAvailableFilters?.values?.map((el) => el.name).slice(0, 3)
 }
 
 const formatPrice = (price?: number) => {
@@ -77,10 +79,10 @@ const defineProductPrice = (price: number, prices: Price[]) => {
   const findPrice = prices.find((el) => el.amount === price)
 
   return {
-    currency: findPrice?.currency_id,
-    amount: findPrice?.amount,
-    decimals: findPrice?.amount ? parseFloat(findPrice.amount.toFixed(2)) : null,
-    format: formatPrice(findPrice?.amount),
+    currency: findPrice?.currency_id || 'ARS',
+    amount: findPrice?.amount || price,
+    decimals: price ? parseFloat(price.toFixed(2)) : null,
+    format: formatPrice(price),
   }
 }
 
@@ -98,7 +100,7 @@ const handleQueryResult = async (query: string) => {
       id: el?.id,
       title: el?.title,
       price: defineProductPrice(el.price, el?.prices?.prices || []),
-      picture: el?.thumbnail_id ? `https://http2.mlstatic.com/D_${el.thumbnail_id}-L.jpg` : null,
+      picture: el?.thumbnail_id ? `https://http2.mlstatic.com/D_${el.thumbnail_id}-N.jpg` : null,
       condition: el?.condition,
       free_shipping: el?.shipping?.free_shipping || false,
     }))

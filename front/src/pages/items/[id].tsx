@@ -1,38 +1,23 @@
-import type { NextPage, GetServerSideProps } from 'next'
+import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
+import { NextSeo } from 'next-seo'
 import { HeaderComponent } from '../../components/header'
-import { PageContainer } from './styles'
+import { PageContainer } from '../../styles/pages'
 import { BreadcrumbComponent } from '../../components/breadcrumb'
 import { ProductComponent } from '../../components/product'
 import { getProduct } from '../../services/mercadolivre'
+import { ProductDTO } from '../../services/dto/product'
 
 interface PageProps {
-  product?: {
-    author: {
-      name: string
-      lastname: string
-    }
-    item: {
-      categories?: string[]
-      condition: string
-      description: string
-      free_shipping: boolean
-      id: string
-      picture?: string
-      sold_quantity: number
-      title: string
-      price: {
-        amount: number
-        currency: string
-        decimals: number
-        format: string
-      }
-    }
-  }
+  product?: ProductDTO
 }
 
 const ProductPage: NextPage = (props: PageProps) => {
   return (
     <>
+      <NextSeo
+        title={`Mercado Livre - ${props.product?.item?.title}`}
+        description={props?.product?.item?.description}
+      />
       <HeaderComponent />
       <PageContainer>
         <div className="breadcrumb">
@@ -55,7 +40,14 @@ const ProductPage: NextPage = (props: PageProps) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async (context) => {
   let handleProduct
 
   if (context?.params?.id && typeof context?.params?.id === 'string') {
@@ -66,6 +58,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       product: handleProduct,
     },
+    revalidate: 60 * 5, // 5 min
   }
 }
 
