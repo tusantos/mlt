@@ -11,6 +11,7 @@ export const { config, styled, css, globalCss, keyframes, getCssText, theme, cre
         grey100: '#EEEEEE',
         placeholder: '#bfbfbf',
         white: '#FFFFFF',
+        blue500: '#3483FA',
       },
     },
   })

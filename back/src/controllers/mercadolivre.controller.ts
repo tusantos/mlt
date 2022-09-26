@@ -119,6 +119,11 @@ const handleQueryResult = async (query: string) => {
 const handleProduct = async (productId: string) => {
   try {
     const handleRequestProduct = await requestProduct(productId)
+
+    if (!handleRequestProduct) {
+      return null
+    }
+
     const handleRequestProductDescription = await requestProductDescription(productId)
     let handleRequestProductCategory
 
@@ -149,7 +154,8 @@ const handleProduct = async (productId: string) => {
         free_shipping: handleRequestProduct?.shipping?.free_shipping,
         sold_quantity: handleRequestProduct?.sold_quantity,
         description: handleRequestProductDescription?.plain_text,
-        categories: handleRequestProductCategory?.path_from_root?.map((el) => el.name) || [],
+        categories:
+          handleRequestProductCategory?.path_from_root?.map((el) => el.name)?.slice(0, 3) || [],
       },
     }
   } catch {

@@ -1,6 +1,6 @@
 import { styled } from '../../styles'
 
-export const SearchContainer = styled('section', {
+export const PageContainer = styled('section', {
   width: '100%',
   maxWidth: '1000px',
   padding: '0px 10px',

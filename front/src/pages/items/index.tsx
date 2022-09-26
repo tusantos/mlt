@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { SearchContainer } from './styles'
+import { PageContainer } from './styles'
 import { BreadcrumbComponent } from '../../components/breadcrumb'
 import { HeaderComponent } from '../../components/header'
 
@@ -7,11 +7,11 @@ const SearchPage: NextPage = () => {
   return (
     <>
       <HeaderComponent />
-      <SearchContainer>
+      <PageContainer>
         <div className="breadcrumb">
           <BreadcrumbComponent data={['risos', 'risos2']} />
         </div>
-      </SearchContainer>
+      </PageContainer>
     </>
   )
 }

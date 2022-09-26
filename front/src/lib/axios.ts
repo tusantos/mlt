@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://api.mercadolibre.com',
+  baseURL: 'http://localhost:3333/v1',
 })
 
 export default api
