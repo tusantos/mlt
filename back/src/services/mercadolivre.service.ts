@@ -17,7 +17,21 @@ const searchProducts = async (req: Request, res: Response) => {
 
 const getProduct = async (req: Request, res: Response) => {
   const id = req?.params?.id
+
+  if (!id) {
+    return res.status(404).send({
+      error: 'not found',
+    })
+  }
+
   const handleProduct = await mercadolivreController.handleProduct(id)
+
+  if (!handleProduct) {
+    return res.status(404).send({
+      error: 'not found',
+    })
+  }
+
   return res.send(handleProduct)
 }
 

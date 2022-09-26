@@ -85,67 +85,75 @@ const defineProductPrice = (price: number, prices: Price[]) => {
 }
 
 const handleQueryResult = async (query: string) => {
-  const request = await requestQueryResult(query)
+  try {
+    const request = await requestQueryResult(query)
 
-  if (!request) {
-    return undefined
-  }
+    if (!request) {
+      return null
+    }
 
-  const handleCategory = handleSearchQueryCategory(request)
+    const handleCategory = handleSearchQueryCategory(request)
 
-  const handleItems = request.results.map((el) => ({
-    id: el?.id,
-    title: el?.title,
-    price: defineProductPrice(el.price, el?.prices?.prices || []),
-    picture: el?.thumbnail_id ? `https://http2.mlstatic.com/D_${el.thumbnail_id}-L.jpg` : null,
-    condition: el?.condition,
-    free_shipping: el?.shipping?.free_shipping || false,
-  }))
+    const handleItems = request.results.map((el) => ({
+      id: el?.id,
+      title: el?.title,
+      price: defineProductPrice(el.price, el?.prices?.prices || []),
+      picture: el?.thumbnail_id ? `https://http2.mlstatic.com/D_${el.thumbnail_id}-L.jpg` : null,
+      condition: el?.condition,
+      free_shipping: el?.shipping?.free_shipping || false,
+    }))
 
-  return {
-    author: {
-      name: 'Arthur',
-      lastname: 'Santos',
-    },
-    categories: handleCategory,
-    items: handleItems,
+    return {
+      author: {
+        name: 'Arthur',
+        lastname: 'Santos',
+      },
+      categories: handleCategory,
+      items: handleItems,
+    }
+  } catch {
+    return null
   }
 }
 
 const handleProduct = async (productId: string) => {
-  const handleRequestProduct = await requestProduct(productId)
-  const handleRequestProductDescription = await requestProductDescription(productId)
-  let handleRequestProductCategory
+  try {
+    const handleRequestProduct = await requestProduct(productId)
+    const handleRequestProductDescription = await requestProductDescription(productId)
+    let handleRequestProductCategory
 
-  if (handleRequestProduct?.category_id) {
-    handleRequestProductCategory = await requestProductCategory(handleRequestProduct?.category_id)
-  }
+    if (handleRequestProduct?.category_id) {
+      handleRequestProductCategory = await requestProductCategory(handleRequestProduct?.category_id)
+    }
 
-  return {
-    author: {
-      name: 'Arthur',
-      lastname: 'Santos',
-    },
-    item: {
-      id: handleRequestProduct?.id,
-      title: handleRequestProduct?.title,
-      price: {
-        currency: handleRequestProduct?.currency_id,
-        amount: handleRequestProduct?.price,
-        decimals: handleRequestProduct?.price
-          ? parseFloat(handleRequestProduct?.price?.toFixed(2))
-          : null,
-        format: formatPrice(handleRequestProduct?.price),
+    return {
+      author: {
+        name: 'Arthur',
+        lastname: 'Santos',
       },
-      picture: handleRequestProduct?.thumbnail_id
-        ? `https://http2.mlstatic.com/D_${handleRequestProduct?.thumbnail_id}-L.jpg`
-        : null,
-      condition: handleRequestProduct?.condition,
-      free_shipping: handleRequestProduct?.shipping?.free_shipping,
-      sold_quantity: handleRequestProduct?.sold_quantity,
-      description: handleRequestProductDescription?.plain_text,
-      categories: handleRequestProductCategory?.path_from_root?.map((el) => el.name) || [],
-    },
+      item: {
+        id: handleRequestProduct?.id,
+        title: handleRequestProduct?.title,
+        price: {
+          currency: handleRequestProduct?.currency_id,
+          amount: handleRequestProduct?.price,
+          decimals: handleRequestProduct?.price
+            ? parseFloat(handleRequestProduct?.price?.toFixed(2))
+            : null,
+          format: formatPrice(handleRequestProduct?.price),
+        },
+        picture: handleRequestProduct?.thumbnail_id
+          ? `https://http2.mlstatic.com/D_${handleRequestProduct?.thumbnail_id}-L.jpg`
+          : null,
+        condition: handleRequestProduct?.condition,
+        free_shipping: handleRequestProduct?.shipping?.free_shipping,
+        sold_quantity: handleRequestProduct?.sold_quantity,
+        description: handleRequestProductDescription?.plain_text,
+        categories: handleRequestProductCategory?.path_from_root?.map((el) => el.name) || [],
+      },
+    }
+  } catch {
+    return null
   }
 }
 
