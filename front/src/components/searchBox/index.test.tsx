@@ -1,7 +1,6 @@
 import { describe, expect, it, vitest } from 'vitest'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { SearchBoxComponent } from './index'
-import { useRouter } from 'next/router'
 
 const pushMock = vitest.fn()
 vitest.mock('next/router', () => {

@@ -19,7 +19,7 @@ const ProductPage: NextPage = (props: PageProps) => {
         description={props?.product?.item?.description}
       />
       <HeaderComponent />
-      <PageContainer>
+      <PageContainer data-testid="productPage">
         <div className="breadcrumb">
           <BreadcrumbComponent data={props?.product?.item?.categories} />
         </div>

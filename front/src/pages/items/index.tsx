@@ -20,7 +20,7 @@ const SearchPage: NextPage = (props: PageProps) => {
         description={`Compre ${props?.query} com Frete Grátis no mesmo dia no Mercado Livre Brasil. Encontre milhares de marcas e produtos a preços incríveis.`}
       />
       <HeaderComponent />
-      <PageContainer>
+      <PageContainer data-testid="searchPage">
         <div className="breadcrumb">
           <BreadcrumbComponent data={props?.products?.categories} />
         </div>
