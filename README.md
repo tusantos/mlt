@@ -3,7 +3,7 @@
 - Buscar produtos
 - Visualizar o produto desejado
 
-## Dependências
+## Dependências importantes
 
 - node v16.13.0
 - nextjs front
