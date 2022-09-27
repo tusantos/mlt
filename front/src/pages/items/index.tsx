@@ -22,7 +22,7 @@ const SearchPage: NextPage = (props: PageProps) => {
       <HeaderComponent />
       <PageContainer>
         <div className="breadcrumb">
-          <BreadcrumbComponent data={props?.products?.categories || []} />
+          <BreadcrumbComponent data={props?.products?.categories} />
         </div>
         <ProductListComponent products={props?.products?.items} />
       </PageContainer>

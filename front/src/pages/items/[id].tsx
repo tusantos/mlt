@@ -21,7 +21,7 @@ const ProductPage: NextPage = (props: PageProps) => {
       <HeaderComponent />
       <PageContainer>
         <div className="breadcrumb">
-          <BreadcrumbComponent data={props?.product?.item?.categories || []} />
+          <BreadcrumbComponent data={props?.product?.item?.categories} />
         </div>
         {props.product && (
           <ProductComponent

@@ -29,16 +29,17 @@ export function SearchBoxComponent() {
   }, [router.query])
 
   return (
-    <SearchContainer>
+    <SearchContainer data-testid="searchBoxComponent">
       <input
         type="text"
         onChange={(e) => setSearchInput(e.target.value)}
         onKeyDown={handleKeyDown}
         value={searchInput}
         placeholder="Buscar produtos, marcas e muito mais…"
+        data-testid="searchBoxComponentSearchInput"
       />
-      <button type="submit" onClick={handleSearch}>
-        <Image src={searchIcon} alt="Icone de busca" width="17" />
+      <button type="submit" onClick={handleSearch} data-testid="searchBoxComponentSearchButton">
+        <Image src={searchIcon} alt="Icone de busca" width="17" height="17" />
       </button>
     </SearchContainer>
   )

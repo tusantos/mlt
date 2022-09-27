@@ -19,7 +19,7 @@ export function ProductComponent({
   description,
 }: ComponentProps) {
   return (
-    <ProductContainer>
+    <ProductContainer data-testid="productComponent">
       <div className="header-infos">
         {picture && (
           <Image
@@ -28,20 +28,33 @@ export function ProductComponent({
             width="600"
             height="600"
             className="img"
+            data-testid="productComponentImage"
           />
         )}
         <div className="infos">
-          <h3 className="sold">
+          <h3 className="sold" data-testid="productComponentSold">
             {condition} - {soldQuantity} vendidos
           </h3>
-          {title && <h1 className="title">{title}</h1>}
-          {price && <h2 className="price">{price}</h2>}
-          <button className="cta">Comprar</button>
+          {title && (
+            <h1 className="title" data-testid="productComponentTitle">
+              {title}
+            </h1>
+          )}
+          {price && (
+            <h2 className="price" data-testid="productComponentPrice">
+              {price}
+            </h2>
+          )}
+          <button className="cta" data-testid="productComponentCta">
+            Comprar
+          </button>
         </div>
       </div>
       <div className="footer-infos">
         <h3 className="title">Descripción del producto</h3>
-        <p className="description">{description}</p>
+        <p className="description" data-testid="productComponentDescription">
+          {description}
+        </p>
       </div>
     </ProductContainer>
   )

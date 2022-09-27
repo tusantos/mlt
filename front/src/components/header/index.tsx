@@ -6,11 +6,11 @@ import { SearchBoxComponent } from '../searchBox'
 
 export function HeaderComponent() {
   return (
-    <Header>
+    <Header data-testid="headerComponent">
       <HeaderContainer>
         <Link href="/">
           <a>
-            <Image src={Logo} alt="Logo Mercado Livre" width="53" className="logo" />
+            <Image src={Logo} alt="Logo Mercado Livre" width="53" height="36" className="logo" />
           </a>
         </Link>
         <SearchBoxComponent />
